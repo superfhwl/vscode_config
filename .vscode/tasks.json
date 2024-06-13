@@ -26,14 +26,12 @@
             "problemMatcher": []
         },
         {
-            "label": "Build Editor Profile",
+            "label": "Build Editor Profile -m10",
             "type": "shell",
-            "command": "cmake",
+            "command": "cmd",
             "args": [
-                "--build", "build",
-                "--target", "Editor",
-                "--config", "profile",
-                "--", "-m"
+                "/C",
+                "set CL_MPCount=10 && cmake --build build --target Editor --config profile -- /m:10"
             ],
             "options": {
                 "cwd": "${workspaceFolder}/../USDProcessTest"
@@ -49,6 +47,27 @@
             "problemMatcher": []
         },
         {
+            "label": "Build Editor Profile",
+            "type": "shell",
+            "command": "cmd",
+            "args": [
+                "/C",
+                "cmake --build build --target Editor --config profile -- /m"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/../USDProcessTest"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },        
+        {
             "label": "Generate Mujoco Protobuf",
             "type": "shell",
             "command": "./protoc.exe",
@@ -62,7 +81,7 @@
                 "isDefault": true
             },
             "options": {
-                "cwd": "C:/Users/ASUS/.o3de/3rdParty/packages/protobuf-3.21.12-windows/protobuf/tools"
+                "cwd": "${env:USERPROFILE}/.o3de/3rdParty/packages/protobuf-3.21.12-windows/protobuf/tools"
             },
             "problemMatcher": [],
             "presentation": {
@@ -77,7 +96,7 @@
             "args": [
                 "--proto_path=${workspaceFolder}/Gems/Mujoco/Code/Source/GrpcService/protos",
                 "--grpc_out=${workspaceFolder}/Gems/Mujoco/Code/Source/GrpcService/protos",
-                "--plugin=protoc-gen-grpc=C:/Users/ASUS/.o3de/3rdParty/packages/grpc-1.51.1-windows/grpc/tools/grpc_cpp_plugin.exe",
+                "--plugin=protoc-gen-grpc=${env:USERPROFILE}/.o3de/3rdParty/packages/grpc-1.51.1-windows/grpc/tools/grpc_cpp_plugin.exe",
                 "${workspaceFolder}/Gems/Mujoco/Code/Source/GrpcService/protos/mjc_message.proto"
             ],
             "group": {
@@ -85,7 +104,7 @@
                 "isDefault": true
             },
             "options": {
-                "cwd": "C:/Users/ASUS/.o3de/3rdParty/packages/protobuf-3.21.12-windows/protobuf/tools"
+                "cwd": "${env:USERPROFILE}/.o3de/3rdParty/packages/protobuf-3.21.12-windows/protobuf/tools"
             },
             "problemMatcher": [],
             "presentation": {
