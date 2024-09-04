@@ -1,15 +1,176 @@
 {
-	"version": "2.0.0",
-	"tasks": [
+    "version": "2.0.0",
+    "tasks": [
+        // Windows Tasks
+        // {
+        //     "label": "Configure CMake Project Win32",
+        //     "type": "shell",
+        //     "command": "cmake",
+        //     "args": [
+        //         "-B",
+        //         "build",
+        //         "-G",
+        //         "Visual Studio 17",
+        //         "-DLY_UNITY_BUILD=ON"
+        //     ],
+        //     "group": {
+        //         "kind": "build",
+        //         "isDefault": true
+        //     },
+        //     "options": {
+        //         "cwd": "${workspaceFolder}/../USDProcessTest"
+        //     },
+        //     "presentation": {
+        //         "reveal": "always",
+        //         "panel": "new"
+        //     },
+        //     "problemMatcher": []
+        // },
+        // {
+        //     "label": "Build Editor Profile -m10 Win32",
+        //     "type": "shell",
+        //     "command": "cmd",
+        //     "args": [
+        //         "/C",
+        //         "set CL_MPCount=10 && cmake --build build --target Editor --config profile -- /m:10"
+        //     ],
+        //     "options": {
+        //         "cwd": "${workspaceFolder}/../USDProcessTest"
+        //     },
+        //     "group": {
+        //         "kind": "build",
+        //         "isDefault": true
+        //     },
+        //     "presentation": {
+        //         "reveal": "always",
+        //         "panel": "shared"
+        //     },
+        //     "problemMatcher": []
+        // },
+        // {
+        //     "label": "Build Editor Profile Win32",
+        //     "type": "shell",
+        //     "command": "cmd",
+        //     "args": [
+        //         "/C",
+        //         "cmake --build build --target Editor --config profile -- /m"
+        //     ],
+        //     "options": {
+        //         "cwd": "${workspaceFolder}/../USDProcessTest"
+        //     },
+        //     "group": {
+        //         "kind": "build",
+        //         "isDefault": true
+        //     },
+        //     "presentation": {
+        //         "reveal": "always",
+        //         "panel": "shared"
+        //     },
+        //     "problemMatcher": []
+        // },
+        // {
+        //     "label": "Generate Mujoco Protobuf Win32",
+        //     "type": "shell",
+        //     "command": "./protoc.exe",
+        //     "args": [
+        //         "--proto_path=${workspaceFolder}/Gems/Mujoco/Code/Source/GrpcService/protos",
+        //         "--cpp_out=${workspaceFolder}/Gems/Mujoco/Code/Source/GrpcService/protos",
+        //         "${workspaceFolder}/Gems/Mujoco/Code/Source/GrpcService/protos/mjc_message.proto"
+        //     ],
+        //     "group": {
+        //         "kind": "build",
+        //         "isDefault": true
+        //     },
+        //     "options": {
+        //         "cwd": "${env:USERPROFILE}/.o3de/3rdParty/packages/protobuf-3.21.12-windows/protobuf/tools"
+        //     },
+        //     "problemMatcher": [],
+        //     "presentation": {
+        //         "reveal": "always",
+        //         "panel": "new"
+        //     }
+        // },
+        // {
+        //     "label": "Generate Mujoco gRPC Win32",
+        //     "type": "shell",
+        //     "command": "./protoc.exe",
+        //     "args": [
+        //         "--proto_path=${workspaceFolder}/Gems/Mujoco/Code/Source/GrpcService/protos",
+        //         "--grpc_out=${workspaceFolder}/Gems/Mujoco/Code/Source/GrpcService/protos",
+        //         "--plugin=protoc-gen-grpc=${env:USERPROFILE}/.o3de/3rdParty/packages/grpc-1.51.1-windows/grpc/tools/grpc_cpp_plugin.exe",
+        //         "${workspaceFolder}/Gems/Mujoco/Code/Source/GrpcService/protos/mjc_message.proto"
+        //     ],
+        //     "group": {
+        //         "kind": "build",
+        //         "isDefault": true
+        //     },
+        //     "options": {
+        //         "cwd": "${env:USERPROFILE}/.o3de/3rdParty/packages/protobuf-3.21.12-windows/protobuf/tools"
+        //     },
+        //     "problemMatcher": [],
+        //     "presentation": {
+        //         "reveal": "always",
+        //         "panel": "new"
+        //     }
+        // },
+
+        // Linux Tasks
         {
-            "label": "Configure CMake Project",
+            "label": "Run Program Without Debugging Linux",
+            "type": "shell",
+            "command": "${workspaceFolder}/../USDProcessTest/build/bin/profile/Editor",
+            "args": [],
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "env": {
+                    "LD_LIBRARY_PATH": "${workspaceFolder}/../USDProcessTest/build/bin/profile/:${env:LD_LIBRARY_PATH}"
+                }
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },    
+        {
+            "label": "Run Program with GDB (Lazy Debugging)",
+            "type": "shell",
+            "command": "gdb",
+            "args": [
+                "--quiet",
+                "--ex", "set auto-solib-add off",
+                "--ex", "set auto-load python-scripts off",
+                "--ex", "set debug-file-directory /dev/null",
+                "--ex", "file ${workspaceFolder}/../USDProcessTest/build/bin/profile/Editor",
+                "--ex", "start"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "env": {
+                    "LD_LIBRARY_PATH": "${workspaceFolder}/../USDProcessTest/build/bin/profile/:${env:LD_LIBRARY_PATH}"
+                }
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": [],
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            }
+        },            
+        {
+            "label": "Configure CMake Project Linux",
             "type": "shell",
             "command": "cmake",
             "args": [
                 "-B",
                 "build",
                 "-G",
-                "Visual Studio 17",
+                "Ninja",
                 "-DLY_UNITY_BUILD=ON"
             ],
             "group": {
@@ -26,12 +187,18 @@
             "problemMatcher": []
         },
         {
-            "label": "Build Editor Profile -m10",
+            "label": "Build Editor Profile -j10 Linux",
             "type": "shell",
-            "command": "cmd",
+            "command": "cmake",
             "args": [
-                "/C",
-                "set CL_MPCount=10 && cmake --build build --target Editor --config profile -- /m:10"
+                "--build",
+                "build",
+                "--target",
+                "Editor",
+                "--config",
+                "profile",
+                "--",
+                "-j10"
             ],
             "options": {
                 "cwd": "${workspaceFolder}/../USDProcessTest"
@@ -47,12 +214,16 @@
             "problemMatcher": []
         },
         {
-            "label": "Build Editor Profile",
+            "label": "Build Editor Profile Linux",
             "type": "shell",
-            "command": "cmd",
+            "command": "cmake",
             "args": [
-                "/C",
-                "cmake --build build --target Editor --config profile -- /m"
+                "--build",
+                "build",
+                "--target",
+                "Editor",
+                "--config",
+                "profile"
             ],
             "options": {
                 "cwd": "${workspaceFolder}/../USDProcessTest"
@@ -66,11 +237,11 @@
                 "panel": "shared"
             },
             "problemMatcher": []
-        },        
+        },
         {
-            "label": "Generate Mujoco Protobuf",
+            "label": "Generate Mujoco Protobuf Linux",
             "type": "shell",
-            "command": "./protoc.exe",
+            "command": "protoc",
             "args": [
                 "--proto_path=${workspaceFolder}/Gems/Mujoco/Code/Source/GrpcService/protos",
                 "--cpp_out=${workspaceFolder}/Gems/Mujoco/Code/Source/GrpcService/protos",
@@ -81,7 +252,7 @@
                 "isDefault": true
             },
             "options": {
-                "cwd": "${env:USERPROFILE}/.o3de/3rdParty/packages/protobuf-3.21.12-windows/protobuf/tools"
+                "cwd": "${workspaceFolder}"
             },
             "problemMatcher": [],
             "presentation": {
@@ -90,13 +261,13 @@
             }
         },
         {
-            "label": "Generate Mujoco gRPC",
+            "label": "Generate Mujoco gRPC Linux",
             "type": "shell",
-            "command": "./protoc.exe",
+            "command": "protoc",
             "args": [
                 "--proto_path=${workspaceFolder}/Gems/Mujoco/Code/Source/GrpcService/protos",
                 "--grpc_out=${workspaceFolder}/Gems/Mujoco/Code/Source/GrpcService/protos",
-                "--plugin=protoc-gen-grpc=${env:USERPROFILE}/.o3de/3rdParty/packages/grpc-1.51.1-windows/grpc/tools/grpc_cpp_plugin.exe",
+                "--plugin=protoc-gen-grpc=/usr/local/bin/grpc_cpp_plugin",
                 "${workspaceFolder}/Gems/Mujoco/Code/Source/GrpcService/protos/mjc_message.proto"
             ],
             "group": {
@@ -104,13 +275,33 @@
                 "isDefault": true
             },
             "options": {
-                "cwd": "${env:USERPROFILE}/.o3de/3rdParty/packages/protobuf-3.21.12-windows/protobuf/tools"
+                "cwd": "${workspaceFolder}"
             },
             "problemMatcher": [],
             "presentation": {
                 "reveal": "always",
                 "panel": "new"
             }
-        }
-	]
+        },
+        {
+            "label": "Generate GDB Index Linux",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "-c",
+                "for file in ${workspaceFolder}/../USDProcessTest/build/bin/profile/*; do if [[ -x \"$file\" || \"$file\" == *.so ]]; then echo \"Generating GDB index for $file\"; gdb-add-index \"$file\"; fi; done"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        }        
+    ]
 }
