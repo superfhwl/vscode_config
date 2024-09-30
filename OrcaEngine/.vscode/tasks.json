@@ -241,7 +241,7 @@
         {
             "label": "Generate Mujoco Protobuf Linux",
             "type": "shell",
-            "command": "protoc",
+            "command": "${workspaceFolder}/../../.o3de/3rdParty/packages/grpc-1.51.1-linux-rev1/grpc/bin/protoc",
             "args": [
                 "--proto_path=${workspaceFolder}/Gems/Mujoco/Code/Source/GrpcService/protos",
                 "--cpp_out=${workspaceFolder}/Gems/Mujoco/Code/Source/GrpcService/protos",
@@ -263,11 +263,11 @@
         {
             "label": "Generate Mujoco gRPC Linux",
             "type": "shell",
-            "command": "protoc",
+            "command": "${workspaceFolder}/../../.o3de/3rdParty/packages/grpc-1.51.1-linux-rev1/grpc/bin/protoc",
             "args": [
                 "--proto_path=${workspaceFolder}/Gems/Mujoco/Code/Source/GrpcService/protos",
                 "--grpc_out=${workspaceFolder}/Gems/Mujoco/Code/Source/GrpcService/protos",
-                "--plugin=protoc-gen-grpc=/usr/local/bin/grpc_cpp_plugin",
+                "--plugin=protoc-gen-grpc=${workspaceFolder}/../../.o3de/3rdParty/packages/grpc-1.51.1-linux-rev1/grpc/bin/grpc_cpp_plugin",
                 "${workspaceFolder}/Gems/Mujoco/Code/Source/GrpcService/protos/mjc_message.proto"
             ],
             "group": {
@@ -302,6 +302,12 @@
                 "panel": "shared"
             },
             "problemMatcher": []
-        }        
+        },
+        {
+            "label": "launch-with-env",
+            "type": "shell",
+            "command": "LD_LIBRARY_PATH=${workspaceFolder}/../USDProcessTest/build/bin/profile/:$LD_LIBRARY_PATH lldb ${workspaceFolder}/../USDProcessTest/build/bin/profile/Editor",
+            "problemMatcher": []
+        }
     ]
 }

@@ -1,6 +1,7 @@
 {
     "cmake.configureOnOpen": true,
     "files.associations": {
+        "*.desktop": "shellscript",
         "memory": "cpp",
         "thread": "cpp",
         "utility": "cpp",
@@ -91,6 +92,12 @@
         "xmemory": "cpp",
         "xtr1common": "cpp",
         "xtree": "cpp",
-        "xutility": "cpp"
+        "xutility": "cpp",
+        "*.tcc": "cpp",
+        "cfenv": "cpp",
+        "memory_resource": "cpp",
+        "string_view": "cpp",
+        "numbers": "cpp",
+        "semaphore": "cpp"
     }
 }
