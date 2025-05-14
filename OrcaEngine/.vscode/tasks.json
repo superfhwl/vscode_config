@@ -18,7 +18,7 @@
         //         "isDefault": true
         //     },
         //     "options": {
-        //         "cwd": "${workspaceFolder}/../USDProcessTest"
+        //         "cwd": "${workspaceFolder}/../OrcaStudio_2409"
         //     },
         //     "presentation": {
         //         "reveal": "always",
@@ -35,7 +35,7 @@
         //         "set CL_MPCount=10 && cmake --build build --target Editor --config profile -- /m:10"
         //     ],
         //     "options": {
-        //         "cwd": "${workspaceFolder}/../USDProcessTest"
+        //         "cwd": "${workspaceFolder}/../OrcaStudio_2409"
         //     },
         //     "group": {
         //         "kind": "build",
@@ -56,7 +56,7 @@
         //         "cmake --build build --target Editor --config profile -- /m"
         //     ],
         //     "options": {
-        //         "cwd": "${workspaceFolder}/../USDProcessTest"
+        //         "cwd": "${workspaceFolder}/../OrcaStudio_2409"
         //     },
         //     "group": {
         //         "kind": "build",
@@ -118,12 +118,12 @@
         {
             "label": "Run Program Without Debugging Linux",
             "type": "shell",
-            "command": "${workspaceFolder}/../USDProcessTest/build/bin/profile/Editor",
-            "args": [],
+            "command": "${workspaceFolder}/../OrcaStudio_2409/build/bin/profile/Editor",
+            "args": ["--forceAdapter", "NVIDIA GeForce RTX 5070 Ti Laptop GPU", "--lockFps"],
             "options": {
                 "cwd": "${workspaceFolder}",
                 "env": {
-                    "LD_LIBRARY_PATH": "${workspaceFolder}/../USDProcessTest/build/bin/profile/:${env:LD_LIBRARY_PATH}"
+                    "LD_LIBRARY_PATH": "${workspaceFolder}/../OrcaStudio_2409/build/bin/profile/:${env:LD_LIBRARY_PATH}"
                 }
             },
             "group": {
@@ -141,13 +141,13 @@
                 "--ex", "set auto-solib-add off",
                 "--ex", "set auto-load python-scripts off",
                 "--ex", "set debug-file-directory /dev/null",
-                "--ex", "file ${workspaceFolder}/../USDProcessTest/build/bin/profile/Editor",
+                "--ex", "file ${workspaceFolder}/../OrcaStudio_2409/build/bin/profile/Editor",
                 "--ex", "start"
             ],
             "options": {
                 "cwd": "${workspaceFolder}",
                 "env": {
-                    "LD_LIBRARY_PATH": "${workspaceFolder}/../USDProcessTest/build/bin/profile/:${env:LD_LIBRARY_PATH}"
+                    "LD_LIBRARY_PATH": "${workspaceFolder}/../OrcaStudio_2409/build/bin/profile/:${env:LD_LIBRARY_PATH}"
                 }
             },
             "group": {
@@ -178,7 +178,7 @@
                 "isDefault": true
             },
             "options": {
-                "cwd": "${workspaceFolder}/../USDProcessTest"
+                "cwd": "${workspaceFolder}/../OrcaStudio_2409"
             },
             "presentation": {
                 "reveal": "always",
@@ -201,7 +201,7 @@
                 "-j10"
             ],
             "options": {
-                "cwd": "${workspaceFolder}/../USDProcessTest"
+                "cwd": "${workspaceFolder}/../OrcaStudio_2409"
             },
             "group": {
                 "kind": "build",
@@ -226,7 +226,7 @@
                 "profile"
             ],
             "options": {
-                "cwd": "${workspaceFolder}/../USDProcessTest"
+                "cwd": "${workspaceFolder}/../OrcaStudio_2409"
             },
             "group": {
                 "kind": "build",
@@ -241,7 +241,7 @@
         {
             "label": "Generate Mujoco Protobuf Linux",
             "type": "shell",
-            "command": "${workspaceFolder}/../../.o3de/3rdParty/packages/grpc-1.51.1-linux-rev1/grpc/bin/protoc",
+            "command": "${workspaceFolder}/../../.o3de/3rdParty/packages/grpc-1.51.1-rev2-linux/grpc/bin/protoc",
             "args": [
                 "--proto_path=${workspaceFolder}/Gems/Mujoco/Code/Source/GrpcService/protos",
                 "--cpp_out=${workspaceFolder}/Gems/Mujoco/Code/Source/GrpcService/protos",
@@ -263,11 +263,11 @@
         {
             "label": "Generate Mujoco gRPC Linux",
             "type": "shell",
-            "command": "${workspaceFolder}/../../.o3de/3rdParty/packages/grpc-1.51.1-linux-rev1/grpc/bin/protoc",
+            "command": "${workspaceFolder}/../../.o3de/3rdParty/packages/grpc-1.51.1-rev2-linux/grpc/bin/protoc",
             "args": [
                 "--proto_path=${workspaceFolder}/Gems/Mujoco/Code/Source/GrpcService/protos",
                 "--grpc_out=${workspaceFolder}/Gems/Mujoco/Code/Source/GrpcService/protos",
-                "--plugin=protoc-gen-grpc=${workspaceFolder}/../../.o3de/3rdParty/packages/grpc-1.51.1-linux-rev1/grpc/bin/grpc_cpp_plugin",
+                "--plugin=protoc-gen-grpc=${workspaceFolder}/../../.o3de/3rdParty/packages/grpc-1.51.1-rev2-linux/grpc/bin/grpc_cpp_plugin",
                 "${workspaceFolder}/Gems/Mujoco/Code/Source/GrpcService/protos/mjc_message.proto"
             ],
             "group": {
@@ -289,7 +289,7 @@
             "command": "bash",
             "args": [
                 "-c",
-                "for file in ${workspaceFolder}/../USDProcessTest/build/bin/profile/*; do if [[ -x \"$file\" || \"$file\" == *.so ]]; then echo \"Generating GDB index for $file\"; gdb-add-index \"$file\"; fi; done"
+                "for file in ${workspaceFolder}/../OrcaStudio_2409/build/bin/profile/*; do if [[ -x \"$file\" || \"$file\" == *.so ]]; then echo \"Generating GDB index for $file\"; gdb-add-index \"$file\"; fi; done"
             ],
             "group": {
                 "kind": "build",
@@ -306,7 +306,7 @@
         {
             "label": "launch-with-env",
             "type": "shell",
-            "command": "LD_LIBRARY_PATH=${workspaceFolder}/../USDProcessTest/build/bin/profile/:$LD_LIBRARY_PATH lldb ${workspaceFolder}/../USDProcessTest/build/bin/profile/Editor",
+            "command": "LD_LIBRARY_PATH=${workspaceFolder}/../OrcaStudio_2409/build/bin/profile/:$LD_LIBRARY_PATH lldb ${workspaceFolder}/../OrcaStudio_2409/build/bin/profile/Editor",
             "problemMatcher": []
         }
     ]

@@ -70,16 +70,18 @@
         //     "initCommands": [
         //         "settings set symbols.load-on-demand true",  
         //     ]
-        // }       
+        // }      
+        
         {
             "name": "Attach to Process",
             "type": "lldb",
             "request": "attach",
-            "program": "${workspaceFolder}/../USDProcessTest/build/bin/profile/Editor",  // 替换为你的可执行程序路径
+            "program": "${workspaceFolder}/../OrcaStudio_2409/build/bin/profile/Editor",  // 替换为你的可执行程序路径
             "initCommands": [
                 "settings set symbols.load-on-demand true"
             ],
             "processId": "${command:pickProcess}",  // 这将让你选择要附加的进程
+            "console": "integratedTerminal", // 关键配置项
             "stopOnEntry": false
         }
     ]
