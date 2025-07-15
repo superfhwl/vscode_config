@@ -116,7 +116,7 @@
 
         // Linux Tasks
         {
-            "label": "Run Program Without Debugging Linux",
+            "label": "Run Editor",
             "type": "shell",
             "command": "${workspaceFolder}/../OrcaStudio_2409/build/bin/profile/Editor",
             "args": ["--forceAdapter", "NVIDIA GeForce RTX 5070 Ti Laptop GPU", "--lockFps"],
@@ -133,17 +133,10 @@
             "problemMatcher": []
         },    
         {
-            "label": "Run Program with GDB (Lazy Debugging)",
+            "label": "Run GameLauncher",
             "type": "shell",
-            "command": "gdb",
-            "args": [
-                "--quiet",
-                "--ex", "set auto-solib-add off",
-                "--ex", "set auto-load python-scripts off",
-                "--ex", "set debug-file-directory /dev/null",
-                "--ex", "file ${workspaceFolder}/../OrcaStudio_2409/build/bin/profile/Editor",
-                "--ex", "start"
-            ],
+            "command": "${workspaceFolder}/../OrcaStudio_2409/build/bin/profile/OrcaStudio_2409.GameLauncher",
+            "args": ["--forceAdapter", "NVIDIA GeForce RTX 5070 Ti Laptop GPU", "--lockFps"],
             "options": {
                 "cwd": "${workspaceFolder}",
                 "env": {
@@ -152,42 +145,12 @@
             },
             "group": {
                 "kind": "build",
-                "isDefault": false
-            },
-            "problemMatcher": [],
-            "presentation": {
-                "echo": true,
-                "reveal": "always",
-                "focus": false,
-                "panel": "shared"
-            }
-        },            
-        {
-            "label": "Configure CMake Project Linux",
-            "type": "shell",
-            "command": "cmake",
-            "args": [
-                "-B",
-                "build",
-                "-G",
-                "Ninja",
-                "-DLY_UNITY_BUILD=ON"
-            ],
-            "group": {
-                "kind": "build",
                 "isDefault": true
             },
-            "options": {
-                "cwd": "${workspaceFolder}/../OrcaStudio_2409"
-            },
-            "presentation": {
-                "reveal": "always",
-                "panel": "new"
-            },
             "problemMatcher": []
-        },
+        },    
         {
-            "label": "Build Editor Profile -j10 Linux",
+            "label": "Build OrcaStudio Profile Linux",
             "type": "shell",
             "command": "cmake",
             "args": [
@@ -195,33 +158,8 @@
                 "build",
                 "--target",
                 "Editor",
-                "--config",
-                "profile",
-                "--",
-                "-j10"
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}/../OrcaStudio_2409"
-            },
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "presentation": {
-                "reveal": "always",
-                "panel": "shared"
-            },
-            "problemMatcher": []
-        },
-        {
-            "label": "Build Editor Profile Linux",
-            "type": "shell",
-            "command": "cmake",
-            "args": [
-                "--build",
-                "build",
-                "--target",
-                "Editor",
+                "OrcaStudio_2409.GameLauncher",
+                "AssetBundler",
                 "--config",
                 "profile"
             ],
