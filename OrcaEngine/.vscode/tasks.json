@@ -18,7 +18,7 @@
         //         "isDefault": true
         //     },
         //     "options": {
-        //         "cwd": "${workspaceFolder}/../OrcaStudio_2409"
+        //         "cwd": "${workspaceFolder}/../OrcaStudio"
         //     },
         //     "presentation": {
         //         "reveal": "always",
@@ -27,15 +27,15 @@
         //     "problemMatcher": []
         // },
         // {
-        //     "label": "Build Editor Profile -m10 Win32",
+        //     "label": "Build OrcaEditor Profile -m10 Win32",
         //     "type": "shell",
         //     "command": "cmd",
         //     "args": [
         //         "/C",
-        //         "set CL_MPCount=10 && cmake --build build --target Editor --config profile -- /m:10"
+        //         "set CL_MPCount=10 && cmake --build build --target OrcaEditor --config profile -- /m:10"
         //     ],
         //     "options": {
-        //         "cwd": "${workspaceFolder}/../OrcaStudio_2409"
+        //         "cwd": "${workspaceFolder}/../OrcaStudio"
         //     },
         //     "group": {
         //         "kind": "build",
@@ -48,15 +48,15 @@
         //     "problemMatcher": []
         // },
         // {
-        //     "label": "Build Editor Profile Win32",
+        //     "label": "Build OrcaEditor Profile Win32",
         //     "type": "shell",
         //     "command": "cmd",
         //     "args": [
         //         "/C",
-        //         "cmake --build build --target Editor --config profile -- /m"
+        //         "cmake --build build --target OrcaEditor --config profile -- /m"
         //     ],
         //     "options": {
-        //         "cwd": "${workspaceFolder}/../OrcaStudio_2409"
+        //         "cwd": "${workspaceFolder}/../OrcaStudio"
         //     },
         //     "group": {
         //         "kind": "build",
@@ -82,7 +82,7 @@
         //         "isDefault": true
         //     },
         //     "options": {
-        //         "cwd": "${env:USERPROFILE}/.o3de/3rdParty/packages/protobuf-3.21.12-windows/protobuf/tools"
+        //         "cwd": "${env:USERPROFILE}/.orca/3rdParty/packages/protobuf-3.21.12-windows/protobuf/tools"
         //     },
         //     "problemMatcher": [],
         //     "presentation": {
@@ -97,7 +97,7 @@
         //     "args": [
         //         "--proto_path=${workspaceFolder}/Gems/Mujoco/Code/Source/GrpcService/protos",
         //         "--grpc_out=${workspaceFolder}/Gems/Mujoco/Code/Source/GrpcService/protos",
-        //         "--plugin=protoc-gen-grpc=${env:USERPROFILE}/.o3de/3rdParty/packages/grpc-1.51.1-windows/grpc/tools/grpc_cpp_plugin.exe",
+        //         "--plugin=protoc-gen-grpc=${env:USERPROFILE}/.orca/3rdParty/packages/grpc-1.51.1-windows/grpc/tools/grpc_cpp_plugin.exe",
         //         "${workspaceFolder}/Gems/Mujoco/Code/Source/GrpcService/protos/mjc_message.proto"
         //     ],
         //     "group": {
@@ -105,7 +105,7 @@
         //         "isDefault": true
         //     },
         //     "options": {
-        //         "cwd": "${env:USERPROFILE}/.o3de/3rdParty/packages/protobuf-3.21.12-windows/protobuf/tools"
+        //         "cwd": "${env:USERPROFILE}/.orca/3rdParty/packages/protobuf-3.21.12-windows/protobuf/tools"
         //     },
         //     "problemMatcher": [],
         //     "presentation": {
@@ -116,14 +116,14 @@
 
         // Linux Tasks
         {
-            "label": "Run Editor",
+            "label": "Run OrcaEditor",
             "type": "shell",
-            "command": "${workspaceFolder}/../OrcaStudio_2409/build/bin/profile/Editor",
-            "args": ["--forceAdapter", "NVIDIA GeForce RTX 5070 Ti Laptop GPU", "--lockFps"],
+            "command": "${workspaceFolder}/../OrcaStudio/build/bin/profile/OrcaEditor",
+            "args": ["--forceAdapter", "NVIDIA GeForce RTX 5070 Ti Laptop GPU", "--lockFps60"],
             "options": {
                 "cwd": "${workspaceFolder}",
                 "env": {
-                    "LD_LIBRARY_PATH": "${workspaceFolder}/../OrcaStudio_2409/build/bin/profile/:${env:LD_LIBRARY_PATH}"
+                    "LD_LIBRARY_PATH": "${workspaceFolder}/../OrcaStudio/build/bin/profile/:${env:LD_LIBRARY_PATH}"
                 }
             },
             "group": {
@@ -135,12 +135,12 @@
         {
             "label": "Run GameLauncher",
             "type": "shell",
-            "command": "${workspaceFolder}/../OrcaStudio_2409/build/bin/profile/OrcaStudio_2409.GameLauncher",
-            "args": ["--forceAdapter", "NVIDIA GeForce RTX 5070 Ti Laptop GPU", "--lockFps"],
+            "command": "${workspaceFolder}/../OrcaStudio/build/bin/profile/OrcaStudio.GameLauncher",
+            "args": ["--forceAdapter", "NVIDIA GeForce RTX 5070 Ti Laptop GPU", "--lockFps60"],
             "options": {
                 "cwd": "${workspaceFolder}",
                 "env": {
-                    "LD_LIBRARY_PATH": "${workspaceFolder}/../OrcaStudio_2409/build/bin/profile/:${env:LD_LIBRARY_PATH}"
+                    "LD_LIBRARY_PATH": "${workspaceFolder}/../OrcaStudio/build/bin/profile/:${env:LD_LIBRARY_PATH}"
                 }
             },
             "group": {
@@ -157,14 +157,47 @@
                 "--build",
                 "build",
                 "--target",
-                "Editor",
-                "OrcaStudio_2409.GameLauncher",
+                "OrcaEditor",
+                "OrcaStudio.GameLauncher",
                 "AssetBundler",
+                "AssetBundlerBatch",
+                "MujocoImporterBatch",
+                "OrcaBuilderHubCli",
                 "--config",
                 "profile"
             ],
             "options": {
-                "cwd": "${workspaceFolder}/../OrcaStudio_2409"
+                "cwd": "${workspaceFolder}/../OrcaStudio"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Build OrcaStudio Profile Linux (PySide)",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build",
+                "build",
+                "--target",
+                "OrcaPySide",
+                "OrcaStudio.GameLauncher",
+                "AssetBundler",
+                "AssetBundlerBatch",
+                "MujocoImporterBatch",
+                "OrcaBuilderHubCli",
+                "--config",
+                "profile"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/../OrcaStudio_Monolithic"
             },
             "group": {
                 "kind": "build",
@@ -179,7 +212,7 @@
         {
             "label": "Generate Mujoco Protobuf Linux",
             "type": "shell",
-            "command": "${workspaceFolder}/../../.o3de/3rdParty/packages/grpc-1.51.1-rev2-linux/grpc/bin/protoc",
+            "command": "${workspaceFolder}/../../.orca/3rdParty/packages/grpc-1.51.1-rev2-linux/grpc/bin/protoc",
             "args": [
                 "--proto_path=${workspaceFolder}/Gems/Mujoco/Code/Source/GrpcService/protos",
                 "--cpp_out=${workspaceFolder}/Gems/Mujoco/Code/Source/GrpcService/protos",
@@ -201,11 +234,11 @@
         {
             "label": "Generate Mujoco gRPC Linux",
             "type": "shell",
-            "command": "${workspaceFolder}/../../.o3de/3rdParty/packages/grpc-1.51.1-rev2-linux/grpc/bin/protoc",
+            "command": "${workspaceFolder}/../../.orca/3rdParty/packages/grpc-1.51.1-rev2-linux/grpc/bin/protoc",
             "args": [
                 "--proto_path=${workspaceFolder}/Gems/Mujoco/Code/Source/GrpcService/protos",
                 "--grpc_out=${workspaceFolder}/Gems/Mujoco/Code/Source/GrpcService/protos",
-                "--plugin=protoc-gen-grpc=${workspaceFolder}/../../.o3de/3rdParty/packages/grpc-1.51.1-rev2-linux/grpc/bin/grpc_cpp_plugin",
+                "--plugin=protoc-gen-grpc=${workspaceFolder}/../../.orca/3rdParty/packages/grpc-1.51.1-rev2-linux/grpc/bin/grpc_cpp_plugin",
                 "${workspaceFolder}/Gems/Mujoco/Code/Source/GrpcService/protos/mjc_message.proto"
             ],
             "group": {
@@ -227,7 +260,7 @@
             "command": "bash",
             "args": [
                 "-c",
-                "for file in ${workspaceFolder}/../OrcaStudio_2409/build/bin/profile/*; do if [[ -x \"$file\" || \"$file\" == *.so ]]; then echo \"Generating GDB index for $file\"; gdb-add-index \"$file\"; fi; done"
+                "for file in ${workspaceFolder}/../OrcaStudio/build/bin/profile/*; do if [[ -x \"$file\" || \"$file\" == *.so ]]; then echo \"Generating GDB index for $file\"; gdb-add-index \"$file\"; fi; done"
             ],
             "group": {
                 "kind": "build",
@@ -242,10 +275,55 @@
             "problemMatcher": []
         },
         {
-            "label": "launch-with-env",
+            "label": "Configure CMake Project Linux",
             "type": "shell",
-            "command": "LD_LIBRARY_PATH=${workspaceFolder}/../OrcaStudio_2409/build/bin/profile/:$LD_LIBRARY_PATH lldb ${workspaceFolder}/../OrcaStudio_2409/build/bin/profile/Editor",
+            "command": "cmake",
+            "args": [
+                "-B",
+                "./build",
+                "-G",
+                "Ninja Multi-Config",
+                "-DLY_UNITY_BUILD=ON"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/../OrcaStudio"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Configure CMake Project Linux (with PySide & Monolithic)",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "-B",
+                "./build",
+                "-G",
+                "Ninja Multi-Config",
+                "-DLY_UNITY_BUILD=ON",
+                "-DBUILD_PYSIDE_LAUNCHER=1",
+                "-DLY_MONOLITHIC_GAME=1"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/../OrcaStudio_Monolithic"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            },
             "problemMatcher": []
         }
+        
     ]
 }
