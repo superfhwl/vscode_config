@@ -115,40 +115,7 @@
         // },
 
         // Linux Tasks
-        {
-            "label": "Run OrcaEditor",
-            "type": "shell",
-            "command": "${workspaceFolder}/../OrcaStudio/build/bin/profile/OrcaEditor",
-            "args": ["--forceAdapter", "NVIDIA GeForce RTX 5070 Ti Laptop GPU", "--lockFps60"],
-            "options": {
-                "cwd": "${workspaceFolder}",
-                "env": {
-                    "LD_LIBRARY_PATH": "${workspaceFolder}/../OrcaStudio/build/bin/profile/:${env:LD_LIBRARY_PATH}"
-                }
-            },
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "problemMatcher": []
-        },    
-        {
-            "label": "Run GameLauncher",
-            "type": "shell",
-            "command": "${workspaceFolder}/../OrcaStudio/build/bin/profile/OrcaStudio.GameLauncher",
-            "args": ["--forceAdapter", "NVIDIA GeForce RTX 5070 Ti Laptop GPU", "--lockFps60"],
-            "options": {
-                "cwd": "${workspaceFolder}",
-                "env": {
-                    "LD_LIBRARY_PATH": "${workspaceFolder}/../OrcaStudio/build/bin/profile/:${env:LD_LIBRARY_PATH}"
-                }
-            },
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "problemMatcher": []
-        },    
+        
         {
             "label": "Build OrcaStudio Profile Linux",
             "type": "shell",
@@ -163,11 +130,12 @@
                 "AssetBundlerBatch",
                 "MujocoImporterBatch",
                 "OrcaBuilderHubCli",
+                "copy_usd",
                 "--config",
                 "profile"
             ],
             "options": {
-                "cwd": "${workspaceFolder}/../OrcaStudio"
+                "cwd": "${workspaceFolder}/../OrcaStudio",
             },
             "group": {
                 "kind": "build",
@@ -180,7 +148,7 @@
             "problemMatcher": []
         },
         {
-            "label": "Build OrcaStudio Profile Linux (PySide)",
+            "label": "Build OrcaStudio Profile Linux (with PySide & Monolithic)",
             "type": "shell",
             "command": "cmake",
             "args": [
@@ -188,16 +156,11 @@
                 "build",
                 "--target",
                 "OrcaPySide",
-                "OrcaStudio.GameLauncher",
-                "AssetBundler",
-                "AssetBundlerBatch",
-                "MujocoImporterBatch",
-                "OrcaBuilderHubCli",
                 "--config",
                 "profile"
             ],
             "options": {
-                "cwd": "${workspaceFolder}/../OrcaStudio_Monolithic"
+                "cwd": "${workspaceFolder}/../OrcaStudio_Monolithic",
             },
             "group": {
                 "kind": "build",
@@ -255,6 +218,117 @@
             }
         },
         {
+            "label": "Generate ParticleRender Protobuf Linux",
+            "type": "shell",
+            "command": "${workspaceFolder}/../../.orca/3rdParty/packages/grpc-1.51.1-rev2-linux/grpc/bin/protoc",
+            "args": [
+                "--proto_path=${workspaceFolder}/Gems/ParticleRender/Code/Source/Grpc/protos",
+                "--cpp_out=${workspaceFolder}/Gems/ParticleRender/Code/Source/Grpc/protos",
+                "${workspaceFolder}/Gems/ParticleRender/Code/Source/Grpc/protos/particle_data.proto"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        },
+        {
+            "label": "Generate EditService Protobuf Linux",
+            "type": "shell",
+            "command": "${workspaceFolder}/../../.orca/3rdParty/packages/grpc-1.51.1-rev2-linux/grpc/bin/protoc",
+            "args": [
+                "--proto_path=${workspaceFolder}/Gems/Mujoco/Code/Source/ActorSystem",
+                "--cpp_out=${workspaceFolder}/Gems/Mujoco/Code/Source/ActorSystem",
+                "${workspaceFolder}/Gems/Mujoco/Code/Source/ActorSystem/edit_service.proto"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        },
+        {
+            "label": "Generate EditService gRPC Linux",
+            "type": "shell",
+            "command": "${workspaceFolder}/../../.orca/3rdParty/packages/grpc-1.51.1-rev2-linux/grpc/bin/protoc",
+            "args": [
+                "--proto_path=${workspaceFolder}/Gems/Mujoco/Code/Source/ActorSystem",
+                "--grpc_out=${workspaceFolder}/Gems/Mujoco/Code/Source/ActorSystem",
+                "--plugin=protoc-gen-grpc=${workspaceFolder}/../../.orca/3rdParty/packages/grpc-1.51.1-rev2-linux/grpc/bin/grpc_cpp_plugin",
+                "${workspaceFolder}/Gems/Mujoco/Code/Source/ActorSystem/edit_service.proto"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        },
+        {
+            "label": "Generate ParticleRender gRPC Linux",
+            "type": "shell",
+            "command": "${workspaceFolder}/../../.orca/3rdParty/packages/grpc-1.51.1-rev2-linux/grpc/bin/protoc",
+            "args": [
+                "--proto_path=${workspaceFolder}/Gems/ParticleRender/Code/Source/Grpc/protos",
+                "--grpc_out=${workspaceFolder}/Gems/ParticleRender/Code/Source/Grpc/protos",
+                "--plugin=protoc-gen-grpc=${workspaceFolder}/../../.orca/3rdParty/packages/grpc-1.51.1-rev2-linux/grpc/bin/grpc_cpp_plugin",
+                "${workspaceFolder}/Gems/ParticleRender/Code/Source/Grpc/protos/particle_data.proto"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        },
+        {
+            "label": "Build ParticleRender TestClient Linux",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "-c",
+                "cd ${workspaceFolder}/Gems/ParticleRender/Code/TestClient && mkdir -p build && cd build && cmake .. && make -j8"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/Gems/ParticleRender/Code/TestClient"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
             "label": "Generate GDB Index Linux",
             "type": "shell",
             "command": "bash",
@@ -275,55 +349,23 @@
             "problemMatcher": []
         },
         {
-            "label": "Configure CMake Project Linux",
+            "label": "List Processes for LLDB Attach Linux",
             "type": "shell",
-            "command": "cmake",
+            "command": "bash",
             "args": [
-                "-B",
-                "./build",
-                "-G",
-                "Ninja Multi-Config",
-                "-DLY_UNITY_BUILD=ON"
+                "-c",
+                "echo '=== OrcaEditor Processes ===' && ps aux | grep -E 'OrcaEditor|GameLauncher' | grep -v grep || echo 'No OrcaEditor/GameLauncher processes found'; echo ''; echo '=== All Processes (filter by name) ===' && ps aux | head -1 && echo 'Use: ps aux | grep <process_name>'"
             ],
-            "options": {
-                "cwd": "${workspaceFolder}/../OrcaStudio"
-            },
             "group": {
                 "kind": "build",
-                "isDefault": true
+                "isDefault": false
             },
             "presentation": {
                 "reveal": "always",
-                "panel": "new"
-            },
-            "problemMatcher": []
-        },
-        {
-            "label": "Configure CMake Project Linux (with PySide & Monolithic)",
-            "type": "shell",
-            "command": "cmake",
-            "args": [
-                "-B",
-                "./build",
-                "-G",
-                "Ninja Multi-Config",
-                "-DLY_UNITY_BUILD=ON",
-                "-DBUILD_PYSIDE_LAUNCHER=1",
-                "-DLY_MONOLITHIC_GAME=1"
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}/../OrcaStudio_Monolithic"
-            },
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "presentation": {
-                "reveal": "always",
-                "panel": "new"
+                "panel": "new",
+                "focus": false
             },
             "problemMatcher": []
         }
-        
     ]
 }
