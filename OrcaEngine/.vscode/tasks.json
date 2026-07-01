@@ -266,10 +266,10 @@
             "type": "shell",
             "command": "${workspaceFolder}/../../.orca/3rdParty/packages/grpc-1.51.1-rev2-linux/grpc/bin/protoc",
             "args": [
-                "--proto_path=${workspaceFolder}/Gems/Mujoco/Code/Source/ActorSystem",
-                "--grpc_out=${workspaceFolder}/Gems/Mujoco/Code/Source/ActorSystem",
+                "--proto_path=${workspaceFolder}/Gems/OrcaLab/Code/Source/Grpc",
+                "--grpc_out=${workspaceFolder}/Gems/OrcaLab/Code/Source/Grpc",
                 "--plugin=protoc-gen-grpc=${workspaceFolder}/../../.orca/3rdParty/packages/grpc-1.51.1-rev2-linux/grpc/bin/grpc_cpp_plugin",
-                "${workspaceFolder}/Gems/Mujoco/Code/Source/ActorSystem/edit_service.proto"
+                "${workspaceFolder}/Gems/OrcaLab/Code/Source/Grpc/edit_service.proto"
             ],
             "group": {
                 "kind": "build",
